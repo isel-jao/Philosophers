@@ -6,7 +6,7 @@
 /*   By: iseljao <iseljao@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 22:15:16 by iseljao           #+#    #+#             */
-/*   Updated: 2021/09/02 17:11:58 by iseljao          ###   ########.fr       */
+/*   Updated: 2021/09/02 17:35:10 by iseljao          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,17 +101,16 @@ void *check_death(void *arg)
 	mem = (t_mem *)(philo->mem);
 	while (1)
 	{
-		// if (current_time(mem) - philo->last_time_eat > mem->time_to_die)
-		// {
+		if (current_time(mem) - philo->last_time_eat > mem->time_to_die)
+		{
 			pthread_mutex_lock(&mem->write);
 			printf("%lums %d has died\n", current_time(mem), philo->id);
-			exit(1);
 			pthread_mutex_unlock(&mem->stop);
 			printf("%lums %d has died\n", current_time(mem), philo->id);
-		// }
-		usleep(100);
+		}
+		usleep(5000);
 	}
-	return(NULL);
+	return (NULL);
 }
 void *routine(void *arg)
 {
@@ -121,25 +120,22 @@ void *routine(void *arg)
 	pthread_t death;
 	philo = (t_philo *)arg;
 	mem = (t_mem *)(philo->mem);
-	// while (1)
-	// {
-		pthread_create(&death, NULL, &check_death, philo);
-		pthread_mutex_lock(philo->right_fork);
-		pthread_mutex_lock(&mem->write);
-		printf("%lums %d has taken his right fork\n", current_time(mem), philo->id);
-		pthread_mutex_unlock(&mem->write);
-		pthread_mutex_lock(philo->left_fork);
-		printf("%lums %d has taken his left fork\n", current_time(mem), philo->id);
-		philo->last_time_eat = current_time(mem);
-		printf("%lums %d is eating\n", current_time(mem), philo->id);
-		usleep(mem->time_to_eat * 1000);
-		pthread_mutex_unlock(philo->left_fork);
-		pthread_mutex_unlock(philo->right_fork);
-		philo->eat_counter++;
-		printf("%lums %d is sleeping\n", current_time(mem), philo->id);
-		usleep(mem->time_to_sleep * 1000);
-		printf("%lums %d is thinking\n", current_time(mem), philo->id);
-	// }
+	pthread_create(&death, NULL, &check_death, philo);
+	pthread_mutex_lock(philo->right_fork);
+	pthread_mutex_lock(&mem->write);
+	printf("%lums %d has taken his right fork\n", current_time(mem), philo->id);
+	pthread_mutex_unlock(&mem->write);
+	pthread_mutex_lock(philo->left_fork);
+	printf("%lums %d has taken his left fork\n", current_time(mem), philo->id);
+	philo->last_time_eat = current_time(mem);
+	printf("%lums %d is eating\n", current_time(mem), philo->id);
+	usleep(mem->time_to_eat * 1000);
+	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
+	philo->eat_counter++;
+	printf("%lums %d is sleeping\n", current_time(mem), philo->id);
+	usleep(mem->time_to_sleep * 1000);
+	printf("%lums %d is thinking\n", current_time(mem), philo->id);
 	return (NULL);
 }
 
@@ -166,12 +162,6 @@ void init_simulation(t_mem *mem)
 	}
 	i = 0;
 	pthread_mutex_lock(&(mem->stop));
-	// while (i < mem->philosophers_count)
-	// {
-	// 	if (pthread_join(mem->philos_threads[i], NULL))
-	// 		exit(errno);
-	// 	i++;
-	// }
 }
 
 int main(int ac, char **av)
@@ -186,11 +176,3 @@ int main(int ac, char **av)
 
 	return (0);
 }
-
-// memset, printf, malloc, free, write,
-// usleep, gettimeofday, pthread_create,
-// pthread_detach, pthread_join, pthread_mutex_init,
-// pthread_mutex_destroy, pthread_mutex_lock,
-// pthread_mutex_unlock
-
-// 70
