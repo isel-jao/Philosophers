@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isel-jao <isel-jao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yqodsi <yqodsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 21:12:52 by iseljao           #+#    #+#             */
-/*   Updated: 2021/09/03 15:10:47 by isel-jao         ###   ########.fr       */
+/*   Updated: 2021/09/03 15:46:21 by yqodsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ long int	ft_atoi(const char *str)
 	if (*str == '-' || *str == '+')
 		++str;
 	while (*str && *str >= '0' && *str <= '9')
+	{
 		res = res * 10 + (*str++ - 48);
+		if (res > INT_MAX)
+			return (-1);
+	}
 	return ((long int)res * b);
 }

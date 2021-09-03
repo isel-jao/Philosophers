@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isel-jao <isel-jao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yqodsi <yqodsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 22:15:23 by iseljao           #+#    #+#             */
-/*   Updated: 2021/09/03 15:17:59 by isel-jao         ###   ########.fr       */
+/*   Updated: 2021/09/03 15:58:48 by yqodsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ typedef struct s_philo
 	pthread_mutex_t *left_fork;
 	pthread_mutex_t *right_fork;
 	int eat_counter;
-	long unsigned last_time_eat;
+	int full;
+	long last_time_eat;
 	void *mem;
 } t_philo;
 
@@ -56,11 +57,12 @@ typedef struct s_mem
 	pthread_mutex_t write;
 	pthread_mutex_t stop;
 	struct timeval t0;
-	long unsigned int time_to_sleep;
-	long unsigned int eating_count;
+	int option_specified;
+	long  int time_to_sleep;
+	long  int eating_count;
 	pthread_mutex_t total_eating_counter;
-	long unsigned int time_to_die;
-	long unsigned int time_to_eat;
+	long  int time_to_die;
+	long  int time_to_eat;
 } t_mem;
 
 /*

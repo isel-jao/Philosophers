@@ -16,11 +16,24 @@ void parse(int ac, char **av, t_mem *mem)
 {
 	ft_memset(mem, 0, sizeof(t_mem));
 	if (ac != 5 && ac != 6)
-		ft_exit(*mem, "wrong number of arguments\n");
+		ft_exit(*mem, "Error: number of arguments\n");
 	mem->philosophers_count = ft_atoi(av[1]);
+	if (mem->philosophers_count <= 0)
+		ft_exit(*mem, "Error: philosopher count!\n");
 	mem->time_to_die = ft_atoi(av[2]);
+	if (mem->time_to_die <= 0)
+		ft_exit(*mem, "Error: time to die\n");
 	mem->time_to_eat = ft_atoi(av[3]);
+	if (mem->time_to_eat <= 0)
+		ft_exit(*mem, "Error: time to eat\n");
 	mem->time_to_sleep = ft_atoi(av[4]);
+	if (mem->time_to_sleep <= 0)
+		ft_exit(*mem, "Error: time to sleep\n");
 	if (ac == 6)
+	{
+		mem->option_specified = 1;
 		mem->eating_count = ft_atoi(av[5]);
+		if (mem->eating_count <= 0)
+			ft_exit(*mem, "Error: eating count\n");
+	}
 }

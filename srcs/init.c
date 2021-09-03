@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isel-jao <isel-jao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yqodsi <yqodsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 21:43:29 by iseljao           #+#    #+#             */
-/*   Updated: 2021/09/03 15:11:50 by isel-jao         ###   ########.fr       */
+/*   Updated: 2021/09/03 16:04:17 by yqodsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init(t_mem *mem)
 	pthread_mutex_init(&(mem->write), NULL);
 	while (i < mem->philosophers_count)
 	{
+		memset(&mem->philo[i], 0, sizeof(t_philo));
 		pthread_mutex_init(&(mem->forks[i]), NULL);
 		i++;
 	}
