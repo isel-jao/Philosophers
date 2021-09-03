@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iseljao <iseljao@student.42.fr>            +#+  +:+       +#+        */
+/*   By: isel-jao <isel-jao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 21:12:52 by iseljao           #+#    #+#             */
-/*   Updated: 2021/09/02 21:23:10 by iseljao          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:10:47 by isel-jao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*ft_memset(void *s, int c, size_t len)
 long int	ft_atoi(const char *str)
 {
 	long int	res;
-	int	b;
+	int			b;
 
 	b = 1;
 	res = 0;
@@ -38,5 +38,5 @@ long int	ft_atoi(const char *str)
 		++str;
 	while (*str && *str >= '0' && *str <= '9')
 		res = res * 10 + (*str++ - 48);
-	return ((int)res * b);
+	return ((long int)res * b);
 }

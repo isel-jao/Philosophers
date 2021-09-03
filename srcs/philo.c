@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iseljao <iseljao@student.42.fr>            +#+  +:+       +#+        */
+/*   By: isel-jao <isel-jao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 22:15:16 by iseljao           #+#    #+#             */
-/*   Updated: 2021/09/02 23:00:50 by iseljao          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:16:08 by isel-jao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void ft_exit(t_mem mem, char *error_msj)
+void	ft_exit(t_mem mem, char *error_msj)
 {
 	(void)mem;
 	if (error_msj == NULL)
@@ -21,7 +21,7 @@ void ft_exit(t_mem mem, char *error_msj)
 	exit(1);
 }
 
-void clean_simulation(t_mem *mem, int status)
+void	clean_simulation(t_mem *mem, int status)
 {
 
 	int i;
@@ -35,19 +35,22 @@ void clean_simulation(t_mem *mem, int status)
 	exit(status);
 }
 
-void *check_death(void *arg)
+void	*check_death(void *arg)
 {
 	t_philo *philo;
+	long unsigned present;
 	t_mem *mem;
 
 	philo = (t_philo *)arg;
 	mem = (t_mem *)(philo->mem);
 	while (1)
 	{
-		if (current_time(mem) - philo->last_time_eat > mem->time_to_die)
+		present = current_time(mem);
+		if (present - philo->last_time_eat > mem->time_to_die)
 		{
 			pthread_mutex_lock(&mem->write);
-			printf("%10lums %d %-25s last meal %10lu\n", current_time(mem), philo->id, "has died", philo->last_time_eat);
+			printf("%10lums %d %-25s", present, philo->id, "has died");
+			printf(" last meal %10lu\n", present - philo->last_time_eat);
 			pthread_mutex_unlock(&mem->stop);
 		}
 		usleep(500);
@@ -55,7 +58,7 @@ void *check_death(void *arg)
 	return (NULL);
 }
 
-void *routine(void *arg)
+void	*routine(void *arg)
 {
 	t_mem *mem;
 	t_philo *philo;
@@ -79,7 +82,6 @@ void *routine(void *arg)
 		print_status(philo, SLEEPING);
 		usleep(mem->time_to_sleep * 1000);
 		print_status(philo, THINKINK);
-		/* code */
 	}
 
 	return (NULL);
@@ -87,7 +89,7 @@ void *routine(void *arg)
 
 void init_simulation(t_mem *mem)
 {
-	int i;
+	int	i;
 
 	pthread_mutex_lock(&(mem->stop));
 	get_first_time(mem);
@@ -110,12 +112,11 @@ void init_simulation(t_mem *mem)
 
 int main(int ac, char **av)
 {
-	t_mem mem;
+	t_mem	mem;
 
 	parse(ac, av, &mem);
-	init_locks(&mem);
+	init(&mem);
 	init_simulation(&mem);
 	clean_simulation(&mem, 0);
-
 	return (0);
 }

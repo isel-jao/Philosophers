@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iseljao <iseljao@student.42.fr>            +#+  +:+       +#+        */
+/*   By: isel-jao <isel-jao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 22:15:23 by iseljao           #+#    #+#             */
-/*   Updated: 2021/09/02 21:23:23 by iseljao          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:17:59 by isel-jao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ typedef struct s_mem
 	pthread_t philos_threads[200];
 	pthread_mutex_t forks[200];
 	t_philo philo[200];
-	long unsigned int big_bang;
 	int philosophers_count;
 	pthread_mutex_t write;
 	pthread_mutex_t stop;
 	struct timeval t0;
 	long unsigned int time_to_sleep;
 	long unsigned int eating_count;
+	pthread_mutex_t total_eating_counter;
 	long unsigned int time_to_die;
 	long unsigned int time_to_eat;
 } t_mem;
@@ -77,7 +77,7 @@ long int ft_atoi(const char *str);
 long unsigned	current_time(t_mem *mem);
 void			parse(int ac, char **av, t_mem *mem);
 void			ft_exit(t_mem mem, char *error_msj);
-void			init_locks(t_mem *mem);
+void			init(t_mem *mem);
 void			clean_simulation(t_mem *mem, int status);
 void			get_first_time(t_mem *mem);
 void			get_first_time(t_mem *mem);

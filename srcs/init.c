@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iseljao <iseljao@student.42.fr>            +#+  +:+       +#+        */
+/*   By: isel-jao <isel-jao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 21:43:29 by iseljao           #+#    #+#             */
-/*   Updated: 2021/09/02 21:43:38 by iseljao          ###   ########.fr       */
+/*   Updated: 2021/09/03 15:11:50 by isel-jao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void init_locks(t_mem *mem)
+void	init(t_mem *mem)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	pthread_mutex_init(&(mem->stop), NULL);
