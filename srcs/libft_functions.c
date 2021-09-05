@@ -6,7 +6,7 @@
 /*   By: yqodsi <yqodsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 21:12:52 by iseljao           #+#    #+#             */
-/*   Updated: 2021/09/03 15:46:21 by yqodsi           ###   ########.fr       */
+/*   Updated: 2021/09/05 17:03:19 by yqodsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,22 @@ void	*ft_memset(void *s, int c, size_t len)
 long int	ft_atoi(const char *str)
 {
 	long int	res;
-	int			b;
+	int			signe;
 
-	b = 1;
+	signe = 1;
 	res = 0;
-	while (*str && (*str == ' ' || *str == '\n' || *str == '\t' || \
-	*str == '\v' || *str == '\f' || *str == '\r'))
-		++str;
 	if (*str == '-')
-		b = -1;
-	if (*str == '-' || *str == '+')
+		return (-1);
+	if (*str == '+')
 		++str;
 	while (*str && *str >= '0' && *str <= '9')
 	{
 		res = res * 10 + (*str++ - 48);
-		if (res > INT_MAX)
+		if (res > 2147483648 || (res > 2147483647 && signe == 1) || \
+			res > 4294967295)
 			return (-1);
 	}
-	return ((long int)res * b);
+	if (*str)
+		return (-1);
+	return ((int)(res * signe));
 }

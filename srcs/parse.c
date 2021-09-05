@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    #:+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iseljao <iseljao@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yqodsi <yqodsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 20:59:26 by iseljao           #+#    #+#             */
-/*   Updated: 2021/09/02 20:59:27 by iseljao          ###   ########.fr       */
+/*   Updated: 2021/09/05 17:04:27 by yqodsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void parse(int ac, char **av, t_mem *mem)
+void	ft_exit(t_mem mem, char *error_msj)
+{
+	(void)mem;
+	if (error_msj == NULL)
+		exit(0);
+	printf("%s", error_msj);
+	exit(1);
+}
+
+void	parse(int ac, char **av, t_mem *mem)
 {
 	ft_memset(mem, 0, sizeof(t_mem));
 	if (ac != 5 && ac != 6)
