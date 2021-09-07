@@ -6,7 +6,7 @@
 /*   By: yqodsi <yqodsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/30 22:15:16 by iseljao           #+#    #+#             */
-/*   Updated: 2021/09/05 17:06:36 by yqodsi           ###   ########.fr       */
+/*   Updated: 2021/09/07 16:01:55 by yqodsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	*check_death(void *arg)
 	t_philo		*philo;
 	long int	present;
 	t_mem		*mem;
+	static int	full_count;
 
 	philo = (t_philo *)arg;
 	mem = (t_mem *)(philo->mem);
@@ -40,11 +41,16 @@ void	*check_death(void *arg)
 		{
 			pthread_mutex_lock(&mem->write);
 			printf("%10lums %d %-25s\n", present, philo->id, "has died");
+			pthread_mutex_unlock(&mem->stop);
 			break ;
 		}
 		usleep(500);
 	}
-	pthread_mutex_unlock(&mem->stop);
+	pthread_mutex_lock(&mem->full_lock);
+	full_count++;
+	if (full_count >= mem->philosophers_count)
+		pthread_mutex_unlock(&mem->stop);
+	pthread_mutex_unlock(&mem->full_lock);
 	return (NULL);
 }
 

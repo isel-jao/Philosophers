@@ -43,3 +43,5 @@ re: fclean all
 test: all
 	@clear
 	@./${NAME} 
+norm:
+	norminette ./srcs/ ./includes/
